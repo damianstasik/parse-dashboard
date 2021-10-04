@@ -9,7 +9,6 @@
 jest.disableAutomock();
 
 var express = require('express');
-var rp = require('request-promise');
 var ParseDashboard = require('../../../Parse-Dashboard/app');
 
 var dashboardSettings = {
@@ -32,11 +31,11 @@ describe('e2e', () => {
       server = app.listen(5051, resolve);
     });
     return p.then(() => {
-      return rp('http://localhost:5051/dashboard');
+      return fetch('http://localhost:5051/dashboard').then(res => res.text());
     })
     .then(result => {
       let bundleLocation = result.match(/<script src="([^"]*)">/)[1]
-      return rp('http://localhost:5051' + bundleLocation);
+      return fetch('http://localhost:5051' + bundleLocation).then(res => res.text());
     })
     .then(bundleText => {
       expect(bundleText.length).toBeGreaterThan(1000000);
@@ -52,11 +51,11 @@ describe('e2e', () => {
       server = app.listen(5051, resolve);
     });
     return p.then(() => {
-      return rp('http://localhost:5051');
+      return fetch('http://localhost:5051').then(res => res.text());
     })
     .then(result => {
       let bundleLocation = result.match(/<script src="([^"]*)">/)[1]
-      return rp('http://localhost:5051' + bundleLocation);
+      return fetch('http://localhost:5051' + bundleLocation).then(res => res.text());
     })
     .then(bundleText => {
       expect(bundleText.length).toBeGreaterThan(1000000);
