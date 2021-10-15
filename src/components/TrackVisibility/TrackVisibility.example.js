@@ -14,7 +14,7 @@ class DemoTrackVisibility extends React.Component {
   constructor() {
     super();
 
-    this.ref = React.createRef(null);
+    this.ref = React.createRef();
 
     ///[0.00...1.00]
     const thresholds = Array(101)
@@ -37,7 +37,7 @@ class DemoTrackVisibility extends React.Component {
   }
 
   render() {
-    
+
     return (
       <React.Fragment>
         <div>{'Yellow block is ' + this.state.visibility + '% visible'}</div>

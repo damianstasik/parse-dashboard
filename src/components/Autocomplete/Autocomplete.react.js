@@ -8,7 +8,6 @@
 import Position             from 'lib/Position';
 import PropTypes            from 'prop-types'
 import React, { Component } from 'react';
-import ReactDOM             from 'react-dom';
 import styles               from 'components/Autocomplete/Autocomplete.scss';
 import SuggestionsList      from 'components/SuggestionsList/SuggestionsList.react';
 
@@ -32,8 +31,8 @@ export default class Autocomplete extends Component {
     this.getPosition = this.getPosition.bind(this);
     this.recalculatePosition = this.recalculatePosition.bind(this);
 
-    this.inputRef = React.createRef(null);
-    this.dropdownRef = React.createRef(null);
+    this.inputRef = React.createRef();
+    this.dropdownRef = React.createRef();
 
     this.handleScroll = () => {
       const pos = this.getPosition();
@@ -53,27 +52,28 @@ export default class Autocomplete extends Component {
       label: props.label,
       position: null
     };
+
+    this.fieldRef = React.createRef();
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-    this.node = ReactDOM.findDOMNode(this);
-    this.node.addEventListener('scroll', this.handleScroll);
+    this.fieldRef.current.addEventListener('scroll', this.handleScroll);
     this.recalculatePosition();
     this._ignoreBlur = false;
   }
 
   componentWillUnmount() {
-    this.node.removeEventListener('scroll', this.handleScroll);
+    this.fieldRef.current.removeEventListener('scroll', this.handleScroll);
     window.removeEventListener('resize', this.handleResize);
   }
 
   getPosition() {
     let newPosition = this.props.fixed
-      ? Position.inWindow(this.node)
-      : Position.inDocument(this.node);
+      ? Position.inWindow(this.fieldRef.current)
+      : Position.inDocument(this.fieldRef.current);
 
-    newPosition.y += this.node.offsetHeight;
+    newPosition.y += this.fieldRef.current.offsetHeight;
 
     return newPosition;
   }
@@ -234,7 +234,7 @@ export default class Autocomplete extends Component {
       // Tab
       // do not type it
       e.preventDefault();
-      
+
       e.stopPropagation();
       // move focus to input
       this.inputRef.current.focus();
@@ -317,11 +317,11 @@ export default class Autocomplete extends Component {
           onClick={onClick}
         />
       );
-    } 
+    }
 
     return (
       <React.Fragment>
-        <div className={fieldClassName}>
+        <div className={fieldClassName} ref={this.fieldRef}>
           <input
             id={1}
             role={'combobox'}
@@ -371,5 +371,5 @@ Autocomplete.propTypes = {
   ),
   error: PropTypes.string.describe(
     'Error to be rendered in place of label if defined'
-  ) 
-} 
+  )
+}

@@ -20,6 +20,8 @@ export default class ChromeDropdown extends React.Component {
       open: false,
       selected: false,
     };
+
+    this.wrapRef = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,10 +38,6 @@ export default class ChromeDropdown extends React.Component {
 
   componentWillMount() {
     this.styles = this.props.styles || styles;
-  }
-
-  componentDidMount() {
-    this.node = ReactDOM.findDOMNode(this);
   }
 
   select(value, e) {
@@ -72,8 +70,8 @@ export default class ChromeDropdown extends React.Component {
     );
 
     if (this.state.open) {
-      let position = Position.inWindow(this.node);
-      let measuredWidth = parseFloat(this.node.offsetWidth);
+      let position = Position.inWindow(this.wrapRef.current);
+      let measuredWidth = parseFloat(this.wrapRef.current.offsetWidth);
       widthStyle = { width: measuredWidth };
       content = (
         <Popover fixed={true} position={position} onExternalClick={() => this.setState({ open: false })}>
@@ -93,7 +91,7 @@ export default class ChromeDropdown extends React.Component {
     }
 
     return (
-      <div style={widthStyle} className={styles.dropdown}>
+      <div style={widthStyle} className={styles.dropdown} ref={this.wrapRef}>
         {content}
       </div>
     );

@@ -11,7 +11,6 @@ import { MONTHS }     from 'lib/DateUtils';
 import Popover        from 'components/Popover/Popover.react';
 import Position       from 'lib/Position';
 import React          from 'react';
-import ReactDOM       from 'react-dom';
 import SliderWrap     from 'components/SliderWrap/SliderWrap.react';
 import styles         from 'components/DatePicker/DatePicker.scss';
 
@@ -22,10 +21,7 @@ export default class DatePicker extends React.Component {
       open: false,
       position: null
     }
-  }
-
-  componentDidMount() {
-    this.node = ReactDOM.findDOMNode(this);
+    this.wrapRef = React.createRef();
   }
 
   toggle() {
@@ -35,7 +31,7 @@ export default class DatePicker extends React.Component {
       }
       return {
         open: true,
-        position: Position.inDocument(this.node)
+        position: Position.inDocument(this.wrapRef.current)
       };
     });
   }
@@ -49,7 +45,7 @@ export default class DatePicker extends React.Component {
   render() {
     let popover = null;
     if (this.state.open) {
-      let width = this.node.clientWidth;
+      let width = this.wrapRef.current.clientWidth;
       popover = (
         <Popover position={this.state.position} onExternalClick={this.close.bind(this)}>
           <SliderWrap direction={Directions.DOWN} expanded={true}>
@@ -73,9 +69,9 @@ export default class DatePicker extends React.Component {
         </div>
       );
     }
-    
+
     return (
-      <div className={styles.input} onClick={this.toggle.bind(this)}>
+      <div className={styles.input} onClick={this.toggle.bind(this)} ref={this.wrapRef}>
         {content}
         {popover}
       </div>

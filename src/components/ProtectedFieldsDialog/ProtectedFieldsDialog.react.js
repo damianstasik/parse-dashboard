@@ -19,7 +19,7 @@ import styles             from 'components/ProtectedFieldsDialog/ProtectedFields
 import MultiSelect        from 'components/MultiSelect/MultiSelect.react';
 import MultiSelectOption  from 'components/MultiSelect/MultiSelectOption.react';
 import TrackVisibility    from 'components/TrackVisibility/TrackVisibility.react';
-import { 
+import {
   unselectable,
   verticalCenter }        from 'stylesheets/base.scss';
 
@@ -32,9 +32,9 @@ export default class ProtectedFieldsDialog extends React.Component {
 
     let keys = Object.keys(protectedFields || {});
 
-    this.refEntry = React.createRef(null);
-    this.refTable = React.createRef(null);
-    this.refScrollHint = React.createRef(null);
+    this.refEntry = React.createRef();
+    this.refTable = React.createRef();
+    this.refScrollHint = React.createRef();
 
     // Intersection observer is used to avoid ugly effe t
     // when suggestion are shown whil input field is scrolled out oof viewpoort
