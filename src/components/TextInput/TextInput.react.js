@@ -10,12 +10,18 @@ import React from 'react';
 import styles from 'components/TextInput/TextInput.scss';
 
 export default class TextInput extends React.Component {
+  constructor() {
+    super();
+    this.inputRef = React.createRef();
+    this.textareaRef = React.createRef();
+  }
+
   componentWillReceiveProps(props) {
     if (props.multiline !== this.props.multiline) {
-      const previousInput = this.refs.input;
+      const previousInput = this.inputRef.current;
       // wait a little while for component to re-render
       setTimeout(function() {
-        const newInput = previousInput ? this.refs.textarea : this.refs.input;
+        const newInput = previousInput ? this.textareaRef.current : this.inputRef.current;
         newInput.focus();
         newInput.value = '';
         newInput.value = props.value;
@@ -35,6 +41,13 @@ export default class TextInput extends React.Component {
       onBlur(e.nativeEvent.target.value);
     }
   }
+  focus() {
+    if (this.props.multiline) {
+      this.textareaRef.current.focus();
+    } else {
+      this.inputRef.current.focus();
+    }
+  }
 
   render() {
     let classes = [styles.text_input];
@@ -44,7 +57,7 @@ export default class TextInput extends React.Component {
     if (this.props.multiline) {
       return (
         <textarea
-          ref="textarea"
+          ref={this.textareaRef}
           id={this.props.id}
           disabled={!!this.props.disabled}
           className={classes.join(' ')}
@@ -58,7 +71,7 @@ export default class TextInput extends React.Component {
     }
     return (
       <input
-        ref="input"
+        ref={this.inputRef}
         id={this.props.id}
         type={this.props.hidden ? 'password' : 'text'}
         disabled={!!this.props.disabled}

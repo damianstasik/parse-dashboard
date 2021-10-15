@@ -21,6 +21,7 @@ export default class DateTimeEntry extends React.Component {
     }
 
     this.wrapRef = React.createRef();
+    this.inputRef = React.createRef();
   }
 
   componentWillReceiveProps(props) {
@@ -80,6 +81,10 @@ export default class DateTimeEntry extends React.Component {
     }
   }
 
+  focus() {
+    this.inputRef.current.focus();
+  }
+
   render() {
     let popover = null;
     if (this.state.open) {
@@ -97,6 +102,7 @@ export default class DateTimeEntry extends React.Component {
     return (
       <div className={this.props.className} onClick={this.toggle.bind(this)} ref={this.wrapRef}>
         <input
+          ref={this.inputRef}
           type='text'
           value={this.state.value}
           onChange={this.inputDate.bind(this)}
