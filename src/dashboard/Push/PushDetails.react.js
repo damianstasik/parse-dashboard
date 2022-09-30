@@ -221,7 +221,7 @@ class PushDetails extends DashboardView {
     this.xhrHandles = [];
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.schema.dispatch(SchemaStore.ActionTypes.FETCH);
     let promise = this.context.fetchPushDetails(this.props.params.pushId);
     promise.then((pushDetails) => {
@@ -330,7 +330,7 @@ class PushDetails extends DashboardView {
     this.xhrHandles.forEach(xhr => xhr.abort());
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.params.pushId !== nextProps.params.pushId) {
       this.setState( {loading: true });
       this.context.fetchPushDetails(nextProps.params.pushId).then((pushDetails) => {

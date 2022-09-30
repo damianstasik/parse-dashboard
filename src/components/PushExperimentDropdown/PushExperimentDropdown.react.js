@@ -23,7 +23,7 @@ export default class PushExperimentDropdown extends React.Component {
     this.dropdownRef = React.createRef();
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.styles = this.props.styles || styles;
   }
 

@@ -76,11 +76,11 @@ class Jobs extends TableView {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.loadData();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.availableJobs) {
       if (nextProps.availableJobs.length > 0) {
         this.action = new SidebarAction('Schedule a job', this.navigateToNew.bind(this));

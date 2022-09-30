@@ -55,7 +55,7 @@ class JobEdit extends React.Component {
     return promise;
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.jobs.dispatch(ActionTypes.FETCH);
   }
 

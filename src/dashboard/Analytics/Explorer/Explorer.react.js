@@ -76,7 +76,7 @@ class Explorer extends DashboardView {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.customQueries.dispatch(ActionTypes.LIST);
     this.props.customQueries.dispatch(ActionTypes.LIST_RECENT);
   }
@@ -85,7 +85,7 @@ class Explorer extends DashboardView {
     this.xhrHandles.forEach(xhr => xhr && xhr.abort());
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.params.displayType !== nextProps.params.displayType) {
       this.setState({ activeQueries: [], mutated: false });
       nextProps.customQueries.dispatch(ActionTypes.LIST);

@@ -27,7 +27,7 @@ export default class DateTimeEditor extends React.Component {
     this.editorRef = React.createRef();
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     this.setState({ value: props.value, text: props.value.toISOString() });
   }
 

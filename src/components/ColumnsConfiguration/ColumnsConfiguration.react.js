@@ -22,7 +22,7 @@ export default class ColumnsConfiguration extends React.Component {
     this.entryRef = React.createRef();
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (props.schema !== this.props.schema) {
       this.setState({
         open: false

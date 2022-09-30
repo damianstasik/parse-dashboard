@@ -36,7 +36,7 @@ export default class GeoPointEditor extends React.Component {
     this.longitudeRef.current.addEventListener('keypress', this.handleKeyLongitude);
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (props.value) {
       if (props.value.latitude !== this.state.latitude) {
         this.setState({ latitude: props.value.latitude });

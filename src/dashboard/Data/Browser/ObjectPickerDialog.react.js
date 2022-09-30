@@ -50,7 +50,7 @@ export default class ObjectPickerDialog extends React.Component {
     this.onConfirm = this.onConfirm.bind(this);
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     const { filters } = this.state;
     const { className, pointerId, relation } = this.props;
     await this.fetchData(className, filters);

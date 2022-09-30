@@ -31,7 +31,7 @@ export default class BrowserFilter extends React.Component {
     this.wrapRef = React.createRef();
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (props.className !== this.props.className) {
       this.setState({ open: false });
     }

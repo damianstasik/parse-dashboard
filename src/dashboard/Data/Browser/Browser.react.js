@@ -158,14 +158,14 @@ class Browser extends DashboardView {
     });
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const currentApp = this.context;
     if (!currentApp.preventSchemaEdits) {
       this.action = new SidebarAction('Create a class', this.showCreateClass.bind(this));
     }
 
     this.props.schema.dispatch(ActionTypes.FETCH)
-    .then(() => this.handleFetchedSchema());
+    .then((data) => this.handleFetchedSchema(data));
     if (!this.props.params.className && this.props.schema.data.get('classes')) {
       this.redirectToFirstClass(this.props.schema.data.get('classes'));
     } else if (this.props.params.className) {
@@ -173,7 +173,7 @@ class Browser extends DashboardView {
     }
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
+  UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
     if (this.props.params.appId !== nextProps.params.appId || this.props.params.className !== nextProps.params.className || this.props.location.search !== nextProps.location.search) {
       if (this.props.params.appId !== nextProps.params.appId || !this.props.params.className) {
         this.setState({ counts: {} });
@@ -619,17 +619,21 @@ class Browser extends DashboardView {
     });
   }
 
-  async handleFetchedSchema() {
+  async handleFetchedSchema(data) {
+    if (!data) {
+      data = this.props.schema.data;
+    }
+
     const counts = this.state.counts;
     if (this.state.computingClassCounts === false) {
       this.setState({ computingClassCounts: true });
-      for (const parseClass of this.props.schema.data.get('classes')) {
+      for (const parseClass of data.get('classes')) {
         const [className] = parseClass;
         counts[className] = await this.context.getClassCount(className);
       }
 
       this.setState({
-        clp: this.props.schema.data.get('CLPs').toJS(),
+        clp: data.get('CLPs').toJS(),
         counts,
         computingClassCounts: false
       });

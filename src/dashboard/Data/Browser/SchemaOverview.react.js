@@ -30,7 +30,7 @@ class Browser extends DashboardView {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.schema.dispatch(ActionTypes.FETCH);
   }
 

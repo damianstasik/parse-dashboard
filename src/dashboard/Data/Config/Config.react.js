@@ -37,11 +37,11 @@ class Config extends TableView {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.config.dispatch(ActionTypes.FETCH);
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
+  UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
     if (this.context !== nextContext) {
       nextProps.config.dispatch(ActionTypes.FETCH);
     }

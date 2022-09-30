@@ -65,7 +65,7 @@ class SlowQueries extends TableView {
     this.xhrHandles = [];
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.fetchDropdownData(this.props);
     this.fetchSlowQueries(this.context);
   }
@@ -74,7 +74,7 @@ class SlowQueries extends TableView {
     this.xhrHandles.forEach(xhr => xhr.abort());
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
+  UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
     if (this.context !== nextContext) {
       this.fetchDropdownData(nextProps);
       this.fetchSlowQueries(nextContext);

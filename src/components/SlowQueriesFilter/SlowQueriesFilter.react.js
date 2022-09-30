@@ -24,7 +24,7 @@ export default class SlowQueriesFilter extends React.Component {
     this.wrapRef = React.createRef();
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (props.schema !== this.props.schema) {
       this.setState({ open: false });
     }

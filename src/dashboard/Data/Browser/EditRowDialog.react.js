@@ -35,7 +35,7 @@ export default class EditRowDialog extends React.Component {
     this.hideFileEditor = this.hideFileEditor.bind(this);
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const newSelectedObject = props.selectedObject;
     const previousSelectedObject = this.props.selectedObject;
     if (newSelectedObject.id !== previousSelectedObject.id) {

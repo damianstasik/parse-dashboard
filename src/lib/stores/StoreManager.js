@@ -53,6 +53,8 @@ export function getStore(name) {
           for (let id in storeData.subscribers) {
             storeData.subscribers[id](result);
           }
+
+          return result;
         });
       } else {
         if (storeData.isGlobal) {
@@ -63,6 +65,8 @@ export function getStore(name) {
         for (let id in storeData.subscribers) {
           storeData.subscribers[id](newState);
         }
+
+        return newState;
       }
     },
     subscribe(cb) {

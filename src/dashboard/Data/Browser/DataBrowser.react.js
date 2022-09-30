@@ -48,7 +48,7 @@ export default class DataBrowser extends React.Component {
     this.saveOrderTimeout = null;
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (props.className !== this.props.className) {
       const columnPreferences = props.app.columnPreference || {}
       let order = ColumnPreferences.getOrder(

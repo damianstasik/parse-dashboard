@@ -50,7 +50,7 @@ class PushAudiencesIndex extends DashboardView {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.schema.dispatch(SchemaStore.ActionTypes.FETCH);
     this.props.pushaudiences.dispatch(PushAudiencesStore.ActionTypes.FETCH,
       {
@@ -73,7 +73,7 @@ class PushAudiencesIndex extends DashboardView {
     });
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (props.loaded){
       this.setState({ loading: false});
     }
