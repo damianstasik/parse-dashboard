@@ -9,7 +9,15 @@ import Icon      from 'components/Icon/Icon.react';
 import React     from 'react';
 import styles    from 'components/MultiSelect/MultiSelect.scss';
 
-let MultiSelectOption = ({ checked, children, dense, disabled, ...other }) => {
+interface Props {
+  value?: string;
+  checked?: boolean;
+  children: React.ReactNode;
+  dense?: boolean;
+  disabled?: boolean;
+}
+
+let MultiSelectOption = ({ checked, children, dense, disabled, ...other }: Props) => {
   
   const classes = [styles.option,
   disabled? styles.disabled: undefined

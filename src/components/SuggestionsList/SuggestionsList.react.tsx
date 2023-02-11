@@ -8,25 +8,36 @@
 import Popover  from 'components/Popover/Popover.react';
 import React    from 'react';
 import styles   from 'components/SuggestionsList/SuggestionsList.scss';
+import Position from 'lib/Position';
 
-export default class Suggestion extends React.Component {
-  constructor() {
-    super();
+interface Props {
+  position: Position;
+  onExternalClick: (e: any) => void;
+  suggestions: any[];
+  suggestionsStyle: any;
+  activeSuggestion: number;
+  onClick: (e: any) => void;
+}
+
+interface State {
+  activeSuggestion: number;
+  open: boolean;
+  position: Position | null;
+}
+
+export default class Suggestion extends React.Component<Props, State> {
+  popoverRef = React.createRef<Popover>();
+
+  constructor(props: Props) {
+    super(props);
     this.state = {
       activeSuggestion: 0,
       open: false,
       position: null
     };
-
-    this.popoverRef = React.createRef();
   }
 
-  toggle() {
-    this.setPosition();
-    this.setState({ open: !this.state.open });
-  }
-
-  setPosition(position) {
+  setPosition(position: Position) {
    this.popoverRef.current && this.popoverRef.current.setPosition(position);
   }
 

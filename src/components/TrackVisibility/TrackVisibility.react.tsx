@@ -7,7 +7,12 @@
  */
 import React, { useRef, useEffect } from 'react';
 
-export default function TrackVisibility(props) {
+interface Props {
+  observer: IntersectionObserver;
+  children: React.ReactNode;
+}
+
+export default function TrackVisibility(props: Props) {
   const refContainer = useRef(null);
 
   useEffect(() => {

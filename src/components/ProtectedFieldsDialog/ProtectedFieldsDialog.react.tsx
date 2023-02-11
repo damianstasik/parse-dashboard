@@ -24,15 +24,45 @@ import baseStyles         from 'stylesheets/base.scss';
 let origin = new Position(0, 0);
 const intersectionMargin = '10px 0px 0px 20px';
 
-export default class ProtectedFieldsDialog extends React.Component {
-  constructor({ protectedFields, columns }) {
-    super();
+interface Props {
+  protectedFields: Map<string, string[]>;
+  columns: { [fieldName: string]: { type: String, targetClass?: String }};
+  validateEntry: (...args: any) => Promise<any>;
+  enablePointerPermissions: boolean;
+  onCancel: () => void;
+  onConfirm: (output: { [key: string]: any }) => void;
+  onChange: (value: string) => void;
+  confirmText: string;
+  details: string;
+  userPointers: any[];
+  title: string;
+}
+
+interface State {
+  entryTypes: Map<string, boolean | { name?: string, id?: string }>;
+  transitioning: boolean;
+  columns: { [fieldName: string]: { type: String, targetClass?: String }};
+  protectedFields: Map<string, string[]>;
+  keys: string[];
+  newEntry: string;
+  entryError: string;
+  newKeys: string[];
+  open: boolean;
+}
+
+export default class ProtectedFieldsDialog extends React.Component<Props, State> {
+  refEntry = React.createRef<Autocomplete>();
+  refTable = React.createRef<HTMLDivElement>();
+  refScrollHint = React.createRef<ScrollHint>();
+
+  observer: IntersectionObserver;
+
+  constructor(props) {
+    super(props);
+
+    const { protectedFields, columns } = props;
 
     let keys = Object.keys(protectedFields || {});
-
-    this.refEntry = React.createRef();
-    this.refTable = React.createRef();
-    this.refScrollHint = React.createRef();
 
     // Intersection observer is used to avoid ugly effe t
     // when suggestion are shown whil input field is scrolled out oof viewpoort
@@ -42,7 +72,7 @@ export default class ProtectedFieldsDialog extends React.Component {
       // hide suggestions to avoid ugly  footer overlap
       this.refEntry.current.setHidden(hidden);
       // also show indicator when input is not visible
-      this.refScrollHint.current.toggleActive(hidden);
+      this.refScrollHint.current.toggle(hidden);
     };
 
     this.observer = new IntersectionObserver(callback, {
@@ -55,11 +85,12 @@ export default class ProtectedFieldsDialog extends React.Component {
       entryTypes: undefined,
       transitioning: false,
       columns: columns,
-      protectedFields: new Map(protectedFields || {}), // protected fields map
+      protectedFields: Map(protectedFields || {}), // protected fields map
       keys,
       newEntry: '',
       entryError: null,
-      newKeys: []
+      newKeys: [],
+      open: false
     };
   }
 
@@ -69,7 +100,7 @@ export default class ProtectedFieldsDialog extends React.Component {
       this.state.keys.map(key => this.props.validateEntry(key))
     );
 
-    let entryTypes = new Map({});
+    let entryTypes = Map({});
 
     for (const { entry, type } of rows) {
       let key;
@@ -109,7 +140,7 @@ export default class ProtectedFieldsDialog extends React.Component {
     if (this.props.validateEntry) {
       this.props.validateEntry(input).then(
         ({ type, entry }) => {
-          let next = { [type]: entry };
+          let next = { [type]: entry } as any;
 
           let key;
           let name;
@@ -150,7 +181,7 @@ export default class ProtectedFieldsDialog extends React.Component {
                 newKeys: nextKeys,
                 entryError: null
               },
-              this.refEntry.current.resetInput()
+              this.refEntry.current.resetInput
             );
           }
         },
@@ -200,13 +231,13 @@ export default class ProtectedFieldsDialog extends React.Component {
   }
 
   /**
-   * @param {String} key - entity (Public, User, Role, field-pointer)
-   * @param {Object} schema - object with fields of collection: { [fieldName]: { type: String, targetClass?: String }}
-   * @param {String[]} selected - fields that are set for entity
-   *
    * Renders Dropdown allowing to pick multiple fields for an entity (row).
+   *
+   * @param key entity (Public, User, Role, field-pointer)
+   * @param schema object with fields of collection
+   * @param selected fields that are set for entity
    */
-  renderSelector(key, schema, selected) {
+  renderSelector(key: string, schema: { [fieldName: string]: { type: String, targetClass?: String }}, selected: string[]) {
     let options = [];
     let values = selected || [];
 
@@ -419,9 +450,7 @@ export default class ProtectedFieldsDialog extends React.Component {
   onClick(e) {
     this.setState(
       {
-        activeSuggestion: 0,
         newEntry: e.currentTarget.innerText,
-        showSuggestions: false
       },
       () => {
         this.props.onChange(this.state.newEntry);
@@ -498,7 +527,7 @@ export default class ProtectedFieldsDialog extends React.Component {
             </div>
           </div>
           <div className={styles.footer}>
-            <ScrollHint ref={this.refScrollIndicator}/>
+            <ScrollHint ref={this.refScrollHint}/>
             <div className={styles.actions}>
               <Button value="Cancel" onClick={this.props.onCancel} />
               <Button

@@ -19,6 +19,9 @@ interface Props {
 
   /** A valid color, used as the fill property for the SVG. */
   fill?: string;
+
+  /** Additional classes to be added to the SVG. */
+  className?: string;
 }
 
 let Icon = (props: Props) => {

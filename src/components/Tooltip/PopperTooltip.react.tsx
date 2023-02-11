@@ -1,8 +1,16 @@
 import React from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
+import { Placement } from '@popperjs/core';
 
-const PopperTooltip = (props) => {
+interface Props {
+  children: React.ReactNode;
+  tooltip: React.ReactNode;
+  visible: boolean;
+  placement?: Placement;
+}
+
+const PopperTooltip = (props: Props) => {
   const { children, tooltip, visible, placement } = props;
   const {
     getArrowProps,

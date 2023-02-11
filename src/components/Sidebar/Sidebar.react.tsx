@@ -17,12 +17,24 @@ import SidebarSubItem from 'components/Sidebar/SidebarSubItem.react';
 import styles         from 'components/Sidebar/Sidebar.scss';
 import { CurrentApp } from 'context/currentApp';
 import Icon     from 'components/Icon/Icon.react';
+import SidebarAction from './SidebarAction';
 let mountPath = window.PARSE_DASHBOARD_PATH;
+
+interface Props {
+  prefix?: string;
+  action?: SidebarAction;
+  children?: React.ReactNode;
+  subsection?: string;
+  sections?: any[];
+  section?: string;
+  appSelector?: boolean;
+  primaryBackgroundColor?: string;
+  secondaryBackgroundColor?: string;
+}
 
 const Sidebar = ({
   prefix,
   action,
-  actionHandler,
   children,
   subsection,
   sections,
@@ -30,7 +42,7 @@ const Sidebar = ({
   appSelector,
   primaryBackgroundColor,
   secondaryBackgroundColor
-}) => {
+}: Props) => {
   const currentApp = useContext(CurrentApp);
   const collapseWidth = 980;
   const [ appsMenuOpen, setAppsMenuOpen ] = useState(false);
@@ -90,7 +102,6 @@ const Sidebar = ({
               name={name}
               link={prefix + link}
               action={action || null}
-              actionHandler={active ? actionHandler : null}
               active={active}>
               {active ? children : null}
             </SidebarSubItem>

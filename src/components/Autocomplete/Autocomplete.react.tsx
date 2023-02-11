@@ -6,13 +6,68 @@
  * the root directory of this source tree.
  */
 import Position             from 'lib/Position';
-import PropTypes            from 'lib/PropTypes'
 import React, { Component } from 'react';
 import styles               from 'components/Autocomplete/Autocomplete.scss';
 import SuggestionsList      from 'components/SuggestionsList/SuggestionsList.react';
 
-export default class Autocomplete extends Component {
-  constructor(props) {
+interface Props {
+  label?: string;
+  fixed?: boolean;
+
+  /** Error to be rendered in place of label if defined */
+  error?: string;
+
+  /** Styling for the input. */
+  inputStyle?: any;
+
+  /** Input field placeholder */
+  placeholder?: string;
+
+  /** Array of suggestions to be rendered */
+  suggestions?: any[];
+
+  /** Styling for the suggestions dropdown. */
+  suggestionsStyle?: any;
+
+  /** Function receiving current input as an argument and should return a string to be rendered as label */
+  buildLabel?: (value: string) => string;
+
+  onClick?: (e: any) => void;
+
+  onFocus?: () => void;
+
+  /** Callback triggered when "enter" key pressed */
+  onSubmit?: (value: string) => void;
+
+  /** Callback triggered when input field is changed */
+  onChange?: (value: string) => void;
+
+  /** Callback triggered when input is blurred */
+  onBlur?: (e?: any) => void;
+
+  /** Function receiving current input as an argument and should return an array to be rendered as suggestions */
+  buildSuggestions?: (value: string) => any[];
+}
+
+interface State {
+  active: boolean;
+  activeSuggestion: number;
+  filteredSuggestions: any[];
+  showSuggestions: boolean;
+  userInput: string;
+  label: string;
+  position: any;
+  hidden: boolean;
+  error: string;
+}
+
+export default class Autocomplete extends Component<Props, State> {
+  inputRef = React.createRef<HTMLInputElement>();
+  dropdownRef = React.createRef<SuggestionsList>();
+  fieldRef = React.createRef<HTMLDivElement>();
+  _ignoreBlur: boolean;
+
+  constructor(props: Props) {
     super(props);
 
     this.setHidden = this.setHidden.bind(this);
@@ -29,31 +84,30 @@ export default class Autocomplete extends Component {
     this.onExternalClick = this.onExternalClick.bind(this);
 
     this.getPosition = this.getPosition.bind(this);
-    this.recalculatePosition = this.recalculatePosition.bind(this);
-
-    this.inputRef = React.createRef();
-    this.dropdownRef = React.createRef();
-    this.fieldRef = React.createRef();
-
-    this.handleScroll = () => {
-      const pos = this.getPosition();
-      this.dropdownRef.current.setPosition(pos);
-    };
-
-    this.handleResize = () => {
-      const pos = this.getPosition();
-      this.dropdownRef.current.setPosition(pos);
-    };
+    this.recalculatePosition = this.recalculatePosition.bind(this);  
 
     this.state = {
+      active: false,
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
       userInput: '',
       label: props.label,
-      position: null
+      position: null,
+      hidden: true,
+      error: undefined
     };
   }
+
+  handleScroll() {
+    const pos = this.getPosition();
+    this.dropdownRef.current.setPosition(pos);
+  };
+
+  handleResize() {
+    const pos = this.getPosition();
+    this.dropdownRef.current.setPosition(pos);
+  };
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
@@ -268,7 +322,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  setHidden(hidden) {
+  setHidden(hidden: boolean) {
     this.setState({ hidden });
   }
 
@@ -347,30 +401,3 @@ export default class Autocomplete extends Component {
     );
   }
 }
-
-Autocomplete.propTypes = {
-  inputStyle: PropTypes.object.describe(
-    'Styling for the input.'
-  ),
-  suggestionsStyle: PropTypes.object.describe(
-    'Styling for the suggestions dropdown.'
-  ),
-  onChange: PropTypes.func.describe(
-    'Callback triggered when input fiield is changed'
-  ),
-  onSubmit: PropTypes.func.describe(
-    'Callback triggered when "enter" key pressed'
-  ),
-  placeholder: PropTypes.string.describe(
-    'Placeholder text'
-  ),
-  buildSuggestions: PropTypes.func.describe(
-    'Function receiving current input as an argument and should return an array to be rendered as suggestions'
-  ),
-  buildLabel: PropTypes.func.describe(
-    'Function receiving current input as an argument and should return a string to be rendered as label'
-  ),
-  error: PropTypes.string.describe(
-    'Error to be rendered in place of label if defined'
-  ) 
-} 

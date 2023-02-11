@@ -9,8 +9,16 @@ import React  from 'react';
 import styles from 'components/Pill/Pill.scss';
 import Icon from 'components/Icon/Icon.react';
 
+interface Props {
+  value: string;
+  onClick?: () => void;
+  fileDownloadLink?: string;
+  followClick?: boolean;
+  shrinkablePill?: boolean;
+}
+
 //TODO: refactor, may want to move onClick outside or need to make onClick able to handle link/button a11y
-let Pill = ({ value, onClick, fileDownloadLink, followClick = false, shrinkablePill = false }) => (
+let Pill = ({ value, onClick, fileDownloadLink, followClick = false, shrinkablePill = false }: Props) => (
   <span
     className={[
       styles.pill,

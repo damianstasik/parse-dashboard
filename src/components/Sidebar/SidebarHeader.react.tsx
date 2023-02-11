@@ -12,11 +12,12 @@ import styles   from 'components/Sidebar/Sidebar.scss';
 // get the package.json environment variable
 const version = process.env.version;
 
-export default class SidebarHeader extends React.Component {
-  constructor() {
-    super();
-    this.state = { };
-  }
+interface Props {
+  isCollapsed?: boolean;
+  dashboardUser?: string;
+}
+
+export default class SidebarHeader extends React.Component<Props> {
   render() {
     const { isCollapsed = false, dashboardUser } = this.props;
     const headerContent = isCollapsed

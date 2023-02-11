@@ -8,8 +8,17 @@
 import { Link } from 'react-router-dom';
 import React    from 'react';
 import styles   from 'components/Sidebar/Sidebar.scss';
+import SidebarAction from './SidebarAction';
 
-let SidebarSubItem = ({ active, name, action, link, children }) => {
+interface Props {
+  active?: boolean;
+  children?: React.ReactNode;
+  name: string;
+  link?: string;
+  action?: SidebarAction;
+}
+
+let SidebarSubItem = ({ active, name, action, link, children }: Props) => {
   if (active) {
     return (
       <div>

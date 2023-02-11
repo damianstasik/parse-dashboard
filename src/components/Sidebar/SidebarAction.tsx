@@ -9,16 +9,14 @@ import React  from 'react';
 import styles from 'components/Sidebar/Sidebar.scss';
 
 export default class SidebarAction {
-  constructor(text, fn) {
-    this.text = text;
-    this.fn = fn;
+  constructor(private text: string, private fn: () => void = () => {}) {
   }
 
   renderButton() {
     return (
       <a
         className={styles.action}
-        onClick={this.fn || function() {}}>
+        onClick={this.fn}>
         {this.text}
       </a>
     );

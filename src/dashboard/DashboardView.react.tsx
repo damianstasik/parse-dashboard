@@ -13,12 +13,16 @@ import baseStyles     from 'stylesheets/base.scss';
 import Button         from 'components/Button/Button.react';
 import { CurrentApp } from 'context/currentApp';
 
-export default class DashboardView extends React.Component {
+interface State {
+  route: string;
+}
+
+export default class DashboardView extends React.Component<{}, State> {
   static contextType = CurrentApp;
   /* A DashboardView renders two pieces: the sidebar, and the app itself */
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       route: '',
     };
@@ -39,11 +43,12 @@ export default class DashboardView extends React.Component {
     }
   }
 
+  renderSidebar() {
+    return null;
+  }
+
   render() {
-    let sidebarChildren = null;
-    if (typeof this.renderSidebar === 'function') {
-      sidebarChildren = this.renderSidebar();
-    }
+    let sidebarChildren = this.renderSidebar();
     let appSlug = this.context ? this.context.slug : '';
 
     if (!this.context.hasCheckedForMigraton) {

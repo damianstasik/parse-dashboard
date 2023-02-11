@@ -10,7 +10,19 @@ import { Link } from 'react-router-dom';
 import React    from 'react';
 import styles   from 'components/Sidebar/Sidebar.scss';
 
-let SidebarSection = ({ active, children, name, link, icon, style, primaryBackgroundColor, secondaryBackgroundColor, isCollapsed }) => {
+interface Props {
+  active?: boolean;
+  children?: React.ReactNode;
+  name: string;
+  link?: string;
+  icon?: string;
+  style?: any;
+  primaryBackgroundColor?: string;
+  secondaryBackgroundColor?: string;
+  isCollapsed?: boolean;
+}
+
+let SidebarSection = ({ active, children, name, link, icon, style, primaryBackgroundColor, secondaryBackgroundColor, isCollapsed }: Props) => {
   let classes = [styles.section];
   if (active) {
     classes.push(styles.active);
@@ -23,7 +35,7 @@ let SidebarSection = ({ active, children, name, link, icon, style, primaryBackgr
     classes.push(styles.collapsed);
     return (
       <div className={classes.join(' ')}>
-        <div style={style} className={styles.section_header} style={{ background: primaryBackgroundColor}}>
+        <div className={styles.section_header} style={{ background: primaryBackgroundColor, ...(style || {}) }}>
           {iconContent}
         </div>
       </div>
@@ -32,7 +44,7 @@ let SidebarSection = ({ active, children, name, link, icon, style, primaryBackgr
   return (
     <div className={classes.join(' ')}>
       {active ?
-        <div style={style} className={styles.section_header} style={{ background: primaryBackgroundColor }}>{iconContent}<span>{name}</span></div> :
+        <div className={styles.section_header} style={{ background: primaryBackgroundColor, ...(style || {}) }}>{iconContent}<span>{name}</span></div> :
         <Link style={style} className={styles.section_header} to={{ pathname: link || '' }}>{iconContent}<span>{name}</span></Link>}
 
       {children ? <div className={styles.section_contents} style={{ background: secondaryBackgroundColor }}>{children}</div> : null}

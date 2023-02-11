@@ -5,11 +5,18 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import PropTypes from 'lib/PropTypes';
 import React     from 'react';
 import styles    from 'components/Tooltip/Tooltip.scss';
 
-let Tooltip = ({ value, children }) => {
+interface Props {
+  /** The tooltip text. */
+  value: React.ReactNode;
+
+  /** The content that should reveal a tooltip when hovered. */
+  children: React.ReactNode;
+}
+
+let Tooltip = ({ value, children }: Props) => {
   return (
     <div className={styles.tooltipWrap}>
       {children}
@@ -25,12 +32,3 @@ let Tooltip = ({ value, children }) => {
 };
 
 export default Tooltip;
-
-Tooltip.propTypes = {
-  value: PropTypes.node.isRequired.describe(
-    'The tooltip text.'
-  ),
-  children: PropTypes.node.describe(
-    'The content that should reveal a tooltip when hovered.'
-  )
-};

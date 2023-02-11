@@ -13,8 +13,15 @@ import React            from 'react';
 import styles           from 'components/Sidebar/Sidebar.scss';
 import baseStyles       from 'stylesheets/base.scss';
 
-const AppsMenu = ({ apps, current, height, onSelect, onPinClick }) => (
-  <div style={{ height }} className={[styles.appsMenu, baseStyles.unselectable].join(' ')}>
+interface Props {
+  apps: any[];
+  current: any;
+  onSelect: (slug: string) => void;
+  onPinClick: () => void;
+}
+
+const AppsMenu = ({ apps, current, onSelect, onPinClick }: Props) => (
+  <div className={[styles.appsMenu, baseStyles.unselectable].join(' ')}>
     <AppName name={current.name} onClick={onSelect.bind(null, current.slug)} onPinClick={onPinClick} />
     <div className={styles.menuSection}>All Apps</div>
     <div className={styles.appListContainer}>
