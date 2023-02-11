@@ -24,6 +24,7 @@ module.exports = {
     assetModuleFilename: 'img/[hash][ext]'
   },
   resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
     modules: [__dirname,path.join(__dirname, '../src'), path.join(__dirname, '../node_modules')]
   },
   resolveLoader: {
@@ -32,7 +33,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(jsx?|tsx?)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
       }, {

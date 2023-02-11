@@ -4,6 +4,7 @@ module.exports = {
     ['@babel/transform-runtime', { corejs: 3 }],
   ],
   presets: [
+    '@babel/preset-typescript',
     '@babel/preset-react',
     ['@babel/preset-env', { corejs: '3.25', useBuiltIns: 'entry' }],
   ],

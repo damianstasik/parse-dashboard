@@ -8,11 +8,11 @@
 var configuration = require('./base.config.js');
 
 configuration.entry = {
-  dashboard: './dashboard/index.js',
-  login: './login/index.js',
-  signup: './signup/index.js',
-  PIG: './parse-interface-guide/index.js',
-  quickstart: './quickstart/index.js',
+  dashboard: './dashboard/index.tsx',
+  login: './login/index.tsx',
+  signup: './signup/index.tsx',
+  PIG: './parse-interface-guide/index.tsx',
+  quickstart: './quickstart/index.tsx',
 };
 configuration.output.path = require('path').resolve('./bundles');
 
