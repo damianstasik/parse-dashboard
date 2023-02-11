@@ -102,9 +102,19 @@ const PARSE_DOT_COM_SERVER_INFO = {
   parseServerVersion: 'Parse.com',
 }
 
-export default class Dashboard extends React.Component {
-  constructor(props) {
-    super();
+interface Props {
+  path: string;
+}
+
+interface State {
+  configLoadingError: any;
+  configLoadingState: any;
+  newFeaturesInLatestVersion: any;
+}
+
+export default class Dashboard extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = {
       configLoadingError: '',
       configLoadingState: AsyncStatus.PROGRESS,

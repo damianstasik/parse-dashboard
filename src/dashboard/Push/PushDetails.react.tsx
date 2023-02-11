@@ -26,7 +26,7 @@ import SliderWrap             from 'components/SliderWrap/SliderWrap.react';
 import styles                 from './PushDetails.scss';
 import subscribeTo            from 'lib/subscribeTo';
 import tableStyles            from 'components/Table/Table.scss';
-import Toggle                 from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }                 from 'components/Toggle/Toggle.react';
 import Toolbar                from 'components/Toolbar/Toolbar.react';
 import { Directions }         from 'lib/Constants';
 import { Link }               from 'react-router-dom';
@@ -602,7 +602,7 @@ class PushDetails extends DashboardView {
         className={FieldStyles.header}
         label={<Label text='Send immediately?' />}
         input={<Toggle
-          type={Toggle.Types.CUSTOM}
+          type={ToggleTypes.CUSTOM}
           value={fields.push_time_type}
           labelLeft='No'
           labelRight='Yes'

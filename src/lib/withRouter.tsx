@@ -1,5 +1,11 @@
 import React from 'react';
-import { useParams, useNavigate, useOutletContext, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext, useLocation, Location, NavigateFunction } from 'react-router-dom';
+
+export interface RouterProps {
+  params: { [key: string]: string };
+  navigate: NavigateFunction;
+  location: Location;
+}
 
 export function withRouter(Component) {
   function render(props) {

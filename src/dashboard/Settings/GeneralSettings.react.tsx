@@ -31,7 +31,7 @@ import renderFlowFooterChanges           from 'lib/renderFlowFooterChanges';
 import setDifference                     from 'lib/setDifference';
 import settingsStyles                    from 'dashboard/Settings/Settings.scss';
 import TextInput                         from 'components/TextInput/TextInput.react';
-import Toggle                            from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }                            from 'components/Toggle/Toggle.react';
 import Toolbar                           from 'components/Toolbar/Toolbar.react';
 import unique                            from 'lib/unique';
 import validateAndSubmitConnectionString from 'lib/validateAndSubmitConnectionString';
@@ -122,7 +122,7 @@ let AppInformationFields = ({
       description='Flip this switch when you launch. This will help us track your traffic and allow us to properly scale your app.' />}
     input={<Toggle
       value={inProduction}
-      type={Toggle.Types.YES_NO}
+      type={ToggleTypes.YES_NO}
       onChange={setInProduction} />
     } />
   { inProduction ? <div>

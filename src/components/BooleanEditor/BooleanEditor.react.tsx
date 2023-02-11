@@ -8,7 +8,7 @@
 import hasAncestor from 'lib/hasAncestor';
 import React from 'react';
 import styles from 'components/BooleanEditor/BooleanEditor.scss';
-import Toggle from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes } from 'components/Toggle/Toggle.react';
 
 export default class BooleanEditor extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class BooleanEditor extends React.Component {
     return (
       <div ref={this.inputRef} style={{ minWidth: this.props.width }} className={styles.editor}>
         <Toggle
-          type={Toggle.Types.TRUE_FALSE}
+          type={ToggleTypes.TRUE_FALSE}
           value={this.state.value}
           onChange={(value) => this.setState({ value })} />
       </div>

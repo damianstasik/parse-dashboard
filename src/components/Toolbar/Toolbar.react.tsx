@@ -5,13 +5,21 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import PropTypes from 'lib/PropTypes';
 import React     from 'react';
 import Icon      from 'components/Icon/Icon.react';
 import styles    from 'components/Toolbar/Toolbar.scss';
 import { useNavigate, useNavigationType, NavigationType } from 'react-router-dom';
 
-let Toolbar = (props) => {
+interface Props {
+  section: any;
+  subsection?: any;
+  details?: any;
+  relation?: any;
+  filters?: any;
+  children?: React.ReactNode;
+}
+
+let Toolbar = (props: Props) => {
   const action = useNavigationType();
   const navigate = useNavigate();
   let backButton;
@@ -53,13 +61,6 @@ let Toolbar = (props) => {
       </div>
     </div>
   );
-};
-
-Toolbar.propTypes = {
-  section: PropTypes.string,
-  subsection: PropTypes.string,
-  details: PropTypes.string,
-  relation: PropTypes.object,
 };
 
 export default Toolbar;

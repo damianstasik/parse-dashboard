@@ -15,7 +15,7 @@ import Label              from 'components/Label/Label.react';
 import Modal              from 'components/Modal/Modal.react';
 import Option             from 'components/Dropdown/Option.react';
 import TextInput          from 'components/TextInput/TextInput.react';
-import Toggle             from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }             from 'components/Toggle/Toggle.react';
 import DateTimeInput      from 'components/DateTimeInput/DateTimeInput.react';
 import SegmentSelect      from 'components/SegmentSelect/SegmentSelect.react';
 import FileInput          from 'components/FileInput/FileInput.react';
@@ -240,7 +240,7 @@ export default class AddColumnDialog extends React.Component {
                 className={styles.addColumnToggleWrapper} />
               <Field
                 label={<Label text='Is it a required field?' description={'When true this field must be filled when a new object is created.'} />}
-                input={<Toggle value={this.state.required} type={Toggle.Types.YES_NO} onChange={(required) => this.setState({ required })} additionalStyles={{ margin: '0px' }} />}
+                input={<Toggle value={this.state.required} type={ToggleTypes.YES_NO} onChange={(required) => this.setState({ required })} additionalStyles={{ margin: '0px' }} />}
                 className={styles.addColumnToggleWrapper} />
             </>
             : null

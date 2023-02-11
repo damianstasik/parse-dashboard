@@ -11,7 +11,7 @@ import Dropdown    from 'components/Dropdown/Dropdown.react';
 import Field       from 'components/Field/Field.react';
 import Label       from 'components/Label/Label.react';
 import Option      from 'components/Dropdown/Option.react';
-import Toggle      from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }      from 'components/Toggle/Toggle.react';
 
 export default class ExportSchemaDialog extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ export default class ExportSchemaDialog extends React.Component {
         }
         <Field
           label={<Label text='Export all classes' />}
-          input={<Toggle value={this.state.all} type={Toggle.Types.YES_NO} onChange={(all) => {this.setState({all})}} />} />
+          input={<Toggle value={this.state.all} type={ToggleTypes.YES_NO} onChange={(all) => {this.setState({all})}} />} />
       </Modal>
     );
   }

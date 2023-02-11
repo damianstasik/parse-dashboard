@@ -22,7 +22,7 @@ import queryFromFilters      from 'lib/queryFromFilters';
 import React                 from 'react';
 import styles                from 'components/PushAudienceDialog/PushAudienceDialog.scss';
 import TextInput             from 'components/TextInput/TextInput.react';
-import Toggle                from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }                from 'components/Toggle/Toggle.react';
 import { List, Map }         from 'immutable';
 import { CurrentApp }        from 'context/currentApp';
 
@@ -211,7 +211,7 @@ export default class PushAudienceDialog extends React.Component {
           <Field
             key={'saveForFuture'}
             label={<Label text='Save this audience for future use?'/>}
-            input={<Toggle value={this.state.saveForFuture} type={Toggle.Types.YES_NO} onChange={this.handleSaveForFuture.bind(this)} />} />
+            input={<Toggle value={this.state.saveForFuture} type={ToggleTypes.YES_NO} onChange={this.handleSaveForFuture.bind(this)} />} />
         );
       }
 

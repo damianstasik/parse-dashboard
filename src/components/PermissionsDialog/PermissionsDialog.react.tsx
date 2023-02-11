@@ -16,7 +16,7 @@ import React            from 'react';
 import ScrollHint       from 'components/ScrollHint/ScrollHint.react'
 import SliderWrap       from 'components/SliderWrap/SliderWrap.react';
 import styles           from 'components/PermissionsDialog/PermissionsDialog.scss';
-import Toggle           from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }           from 'components/Toggle/Toggle.react';
 import Autocomplete     from 'components/Autocomplete/Autocomplete.react';
 import { Map, fromJS }  from 'immutable';
 import TrackVisibility  from 'components/TrackVisibility/TrackVisibility.react';
@@ -1203,7 +1203,7 @@ export default class PermissionsDialog extends React.Component {
               <Toggle
                 darkBg={true}
                 value={this.state.level}
-                type={Toggle.Types.TWO_WAY}
+                type={ToggleTypes.TWO_WAY}
                 optionLeft="Simple"
                 optionRight="Advanced"
                 onChange={level => {

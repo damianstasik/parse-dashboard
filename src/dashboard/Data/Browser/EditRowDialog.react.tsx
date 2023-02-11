@@ -6,7 +6,7 @@ import Field from 'components/Field/Field.react';
 import Label from 'components/Label/Label.react';
 import TextInput from 'components/TextInput/TextInput.react';
 import DateTimeInput from 'components/DateTimeInput/DateTimeInput.react';
-import Toggle from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes } from 'components/Toggle/Toggle.react';
 import Pill from 'components/Pill/Pill.react';
 import GeoPointEditor from 'components/GeoPointEditor/GeoPointEditor.react';
 import FileEditor from 'components/FileEditor/FileEditor.react';
@@ -322,7 +322,7 @@ export default class EditRowDialog extends React.Component {
             <TextInput disabled={true} placeholder={val === undefined && '(undefined)'} value={selectedObject[name]} />
           ) : (
             <Toggle
-              type={Toggle.Types.TRUE_FALSE}
+              type={ToggleTypes.TRUE_FALSE}
               value={selectedObject[name]}
               onChange={newValue => this.handleChange(newValue, name)}
             />

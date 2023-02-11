@@ -8,7 +8,7 @@
 import React    from 'react';
 import Field    from 'components/Field/Field.react';
 import Label    from 'components/Label/Label.react';
-import Toggle   from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }   from 'components/Toggle/Toggle.react';
 import TextInput from 'components/TextInput/TextInput.react';
 
 export const component = Field;
@@ -18,7 +18,7 @@ export const demos = [
     render: () => (
       <Field
         label={<Label text='Are you a monster hunter?' description='Or have you become the monster' />}
-        input={<Toggle value={true} type={Toggle.Types.YES_NO} onChange={() => {}} />} />
+        input={<Toggle value={true} type={ToggleTypes.YES_NO} onChange={() => {}} />} />
     )
   },
   {

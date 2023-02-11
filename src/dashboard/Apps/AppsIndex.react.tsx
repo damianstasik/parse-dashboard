@@ -16,7 +16,7 @@ import React         from 'react';
 import styles        from 'dashboard/Apps/AppsIndex.scss';
 import baseStyles    from 'stylesheets/base.scss';
 import AppBadge      from 'components/AppBadge/AppBadge.react';
-import { withRouter } from 'lib/withRouter';
+import { RouterProps, withRouter } from 'lib/withRouter';
 import { useNavigate } from 'react-router-dom';
 
 function dash(value, content) {
@@ -90,13 +90,23 @@ let AppCard = ({
   </li>
 }
 
+interface Props extends RouterProps {
+  newFeaturesInLatestVersion: string[];
+}
+
+interface State {
+  search: string;
+}
+
 @withRouter
-class AppsIndex extends React.Component {
-  constructor() {
-    super();
+class AppsIndex extends React.Component<Props, State> {
+
+  searchRef: React.RefObject<HTMLInputElement> = React.createRef();
+
+  constructor(props) {
+    super(props);
     this.state = { search: '' };
     this.focusField = this.focusField.bind(this);
-    this.searchRef = React.createRef();
   }
 
   componentWillMount() {

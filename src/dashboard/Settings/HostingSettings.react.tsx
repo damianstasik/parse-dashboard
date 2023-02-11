@@ -17,7 +17,7 @@ import React                   from 'react';
 import renderFlowFooterChanges from 'lib/renderFlowFooterChanges';
 import styles                  from 'dashboard/Settings/Settings.scss';
 import TextInput               from 'components/TextInput/TextInput.react';
-import Toggle                  from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }                  from 'components/Toggle/Toggle.react';
 import Toolbar                 from 'components/Toolbar/Toolbar.react';
 import unique                  from 'lib/unique';
 
@@ -169,7 +169,7 @@ export default class HostingSettings extends DashboardView {
 				}
 				input={<Toggle
 					value={fields.verify_emails}
-					type={Toggle.Types.YES_NO}
+					type={ToggleTypes.YES_NO}
 					onChange={setField.bind(this, 'verify_emails')} />
 				}
 			/>

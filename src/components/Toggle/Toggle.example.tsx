@@ -6,11 +6,15 @@
  * the root directory of this source tree.
  */
 import React    from 'react';
-import Toggle   from 'components/Toggle/Toggle.react';
+import Toggle, { Props, ToggleTypes }   from 'components/Toggle/Toggle.react';
 
-class ToggleWrapper extends React.Component {
-  constructor() {
-    super();
+interface State {
+  value: string | boolean;
+}
+
+class ToggleWrapper extends React.Component<Omit<Props, 'value' | 'onChange'>, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = { value: false };
   }
 
@@ -30,22 +34,22 @@ export const demos = [
   }, {
     name: 'True/False Toggle',
     render: () => (
-      <ToggleWrapper type={Toggle.Types.TRUE_FALSE} />
+      <ToggleWrapper type={ToggleTypes.TRUE_FALSE} />
     ),
   }, {
     name: 'On/Off Toggle',
     render: () => (
-      <ToggleWrapper type={Toggle.Types.ON_OFF} />
+      <ToggleWrapper type={ToggleTypes.ON_OFF} />
     ),
   }, {
     name: 'Two-Way Toggle',
     render: () => (
-      <ToggleWrapper type={Toggle.Types.TWO_WAY} optionLeft='Hourly' optionRight='Daily' />
+      <ToggleWrapper type={ToggleTypes.TWO_WAY} optionLeft='Hourly' optionRight='Daily' />
     ),
   }, {
     name: 'Custom Toggle',
     render: () => (
-      <ToggleWrapper type={Toggle.Types.CUSTOM} optionLeft='Hourly' optionRight='Daily' labelLeft='Group by Hour' labelRight='Group by Day' />
+      <ToggleWrapper type={ToggleTypes.CUSTOM} optionLeft='Hourly' optionRight='Daily' labelLeft='Group by Hour' labelRight='Group by Day' />
     ),
   }
 ];

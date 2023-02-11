@@ -21,7 +21,7 @@ import ReleaseInfo            from 'components/ReleaseInfo/ReleaseInfo';
 import styles                 from 'dashboard/Data/Jobs/Jobs.scss';
 import TextInput              from 'components/TextInput/TextInput.react';
 import TimeInput              from 'components/TimeInput/TimeInput.react';
-import Toggle                 from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }                 from 'components/Toggle/Toggle.react';
 import Toolbar                from 'components/Toolbar/Toolbar.react';
 import { hoursFrom, dateStringUTC }  from 'lib/DateUtils';
 
@@ -77,7 +77,7 @@ export default class JobsForm extends DashboardView {
         label={<Label text='How should it repeat?' />}
         input={
           <Toggle
-            type={Toggle.Types.TWO_WAY}
+            type={ToggleTypes.TWO_WAY}
             value={fields.repeatType}
             optionLeft='on an interval'
             optionRight='daily'

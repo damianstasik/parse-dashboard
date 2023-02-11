@@ -11,7 +11,7 @@ import Field         from 'components/Field/Field.react';
 import Label         from 'components/Label/Label.react';
 import Option        from 'components/Dropdown/Option.react';
 import React         from 'react';
-import Toggle        from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }        from 'components/Toggle/Toggle.react';
 import { pad }       from 'lib/DateUtils';
 
 export function setTimeFieldDescription(isLocal) {
@@ -66,7 +66,7 @@ export function renderExpirationContent(fields, setField) {
       key='expiration_time_type'
       label={<Label text='What type of expiration?' />}
       input={<Toggle
-        type={Toggle.Types.CUSTOM}
+        type={ToggleTypes.CUSTOM}
         labelLeft='A Specific Time'
         labelRight='After Interval'
         optionLeft='time'

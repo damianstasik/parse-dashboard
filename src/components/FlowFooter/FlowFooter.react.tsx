@@ -6,10 +6,26 @@
  * the root directory of this source tree.
  */
 import React     from 'react';
-import PropTypes from 'lib/PropTypes';
 import styles    from 'components/FlowFooter/FlowFooter.scss';
 
-let FlowFooter = ({ primary, secondary, errorMessage, borderTop, children }) => (
+interface Props {
+  /** A primary action Button. */
+  primary?: React.ReactNode;
+
+  /** A secondary action Button. */
+  secondary?: React.ReactNode;
+
+  /** An error message to display. */
+  errorMessage?: React.ReactNode;
+
+  /** Style override for footer border-top. */
+  borderTop?: string;
+
+  /** The text of the footer. <strong> tags will be rendered in bold. */
+  children?: React.ReactNode;
+}
+
+let FlowFooter = ({ primary, secondary, errorMessage, borderTop, children }: Props) => (
   <div className={styles.footer} style={borderTop ? { borderTop } : null}>
     <div className={styles.right}>
       {secondary}
@@ -21,21 +37,3 @@ let FlowFooter = ({ primary, secondary, errorMessage, borderTop, children }) => 
   </div>
 );
 export default FlowFooter;
-
-FlowFooter.propTypes = {
-  primary: PropTypes.node.describe(
-    'A primary action Button.'
-  ),
-  secondary: PropTypes.node.describe(
-    'A secondary action Button.'
-  ),
-  errorMessage: PropTypes.node.describe(
-    'The error message of the flow.'
-  ),
-  borderTop: PropTypes.string.describe(
-    'Style override for footer border-top.'
-  ),
-  children: PropTypes.node.describe(
-    'The text of the footer. <strong> tags will be rendered in bold.'
-  ),
-}

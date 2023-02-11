@@ -9,7 +9,7 @@ import React    from 'react';
 import Field    from 'components/Field/Field.react';
 import Fieldset from 'components/Fieldset/Fieldset.react';
 import Label    from 'components/Label/Label.react';
-import Toggle   from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }   from 'components/Toggle/Toggle.react';
 
 export const component = Fieldset;
 
@@ -21,7 +21,7 @@ export const demos = [
         description='I am description.'>
         <Field
           label={<Label text='Label Text' description='Label Description' />}
-          input={<Toggle value={true} type={Toggle.Types.YES_NO} onChange={function() {}} />} />
+          input={<Toggle value={true} type={ToggleTypes.YES_NO} onChange={function() {}} />} />
       </Fieldset>
     )
   }

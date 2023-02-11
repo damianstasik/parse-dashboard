@@ -20,11 +20,11 @@ const POINTS = {
   C: (1.5 * (SMALL_RADIUS + LARGE_RADIUS) * Math.PI + SMALL_RADIUS + LARGE_RADIUS) / LENGTH, // End of second loop
 };
 
-function getRadius(t) {
+function getRadius(t: number): number {
   return 40 - 60 * Math.abs(t - 0.5);
 }
 
-function getPosition(t) {
+function getPosition(t: number): { x: number, y: number } {
   if (t < POINTS.A) {
     let multiplier = LENGTH / SMALL_RADIUS;
     return {
@@ -51,13 +51,17 @@ function getPosition(t) {
   }
 }
 
-export default class Loader extends React.Component {
-  constructor() {
-    super();
-    this.dot0Ref = React.createRef();
-    this.dot1Ref = React.createRef();
-    this.dot2Ref = React.createRef();
-  }
+interface Props {
+  className?: string;
+}
+
+export default class Loader extends React.Component<Props> {
+  dot0Ref = React.createRef<HTMLDivElement>();
+  dot1Ref = React.createRef<HTMLDivElement>();
+  dot2Ref = React.createRef<HTMLDivElement>();
+
+  mounted = false;
+  mountTime = 0;
 
   componentDidMount() {
     this.mounted = true;
@@ -73,7 +77,7 @@ export default class Loader extends React.Component {
     if (!this.mounted) {
       return;
     }
-    let delta = new Date() - this.mountTime;
+    let delta = Date.now() - this.mountTime;
     let t = (delta / DURATION) % 1;
     let pos = getPosition(t);
     let style = this.dot0Ref.current.style;

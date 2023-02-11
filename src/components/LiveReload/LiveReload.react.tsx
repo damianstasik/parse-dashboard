@@ -5,13 +5,35 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import PropTypes        from 'lib/PropTypes';
 import React            from 'react';
 import { abortableGet } from 'lib/AJAX';
 
-export default class LiveReload extends React.Component {
-  constructor(props) {
-    super();
+interface Props {
+	/** Initial data to seed the component before any request has been made. If this is not passed, then your render function must be prepared to handle being called with "undefined" instead of data. Passing this will also cause the first load to happen after refreshIntervalMillis, while not passing it will cause it the first load to happen immediately. */
+	initialData: any;
+
+	/** Either a URL to fetch updates from, or a function that returns a promise that fetches update, or a function that returns { promise, xhr }. */
+	source: any;
+
+	/** How often to refresh the data, in milliseconds. Defaults to 1s. */
+	refreshIntervalMillis?: any;
+
+	/** Receives the data from the URL or promise and returns the component to be rendered. */
+	render: any;
+}
+
+interface State {
+	currentData: any;
+}
+
+export default class LiveReload extends React.Component<Props, State> {
+	refreshIntervalMillis: number;
+	timer: number;
+	abortXHR: () => void;
+	shouldContinueReloading = false;
+
+  constructor(props: Props) {
+    super(props);
     this.abortXHR = () => {};
     this.timer = null;
     this.refreshIntervalMillis = props.refreshIntervalMillis || 1000;
@@ -71,11 +93,4 @@ export default class LiveReload extends React.Component {
   render() {
 		return this.props.render(this.state.currentData);
   }
-}
-
-LiveReload.propTypes = {
-	refreshIntervalMillis: PropTypes.number.describe('How often to refresh the data, in milliseconds. Defaults to 1s.'),
-	source: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired.describe('Either a URL to fetch updates from, or a function that returns a promise that fetches update, or a function that returns { promise, xhr }.'),
-	render: PropTypes.func.isRequired.describe('Receives the data from the URL or promise and returns the component to be rendered.'),
-	initialData: PropTypes.any.describe('Initial data to seed the component before any request has been made. If this is not passed, then your render function must be prepared to handle being called with "undefined" instead of data. Passing this will also cause the first load to happen after refreshIntervalMillis, while not passing it will cause it the first load to happen immediately.'),
 }

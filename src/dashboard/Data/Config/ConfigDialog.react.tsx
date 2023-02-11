@@ -16,7 +16,7 @@ import Option          from 'components/Dropdown/Option.react';
 import Parse           from 'parse';
 import React           from 'react';
 import TextInput       from 'components/TextInput/TextInput.react';
-import Toggle          from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }          from 'components/Toggle/Toggle.react';
 import validateNumeric from 'lib/validateNumeric';
 import styles          from 'dashboard/Data/Browser/Browser.scss';
 import semver          from 'semver/preload.js';
@@ -48,7 +48,7 @@ function saveFile(onChange, file) {
 const EDITORS = {
   Boolean: (value, onChange) => (
     <Toggle
-      type={Toggle.Types.TRUE_FALSE}
+      type={ToggleTypes.TRUE_FALSE}
       value={!!value}
       onChange={onChange} />
   ),
@@ -248,7 +248,7 @@ export default class ConfigDialog extends React.Component {
               }
               input={
                 <Toggle
-                  type={Toggle.Types.YES_NO}
+                  type={ToggleTypes.YES_NO}
                   value={this.state.masterKeyOnly}
                   onChange={(masterKeyOnly) => this.setState({ masterKeyOnly })}
                   additionalStyles={{ margin: '0px' }} />

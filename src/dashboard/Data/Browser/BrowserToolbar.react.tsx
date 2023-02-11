@@ -18,7 +18,7 @@ import SecurityDialog       from 'dashboard/Data/Browser/SecurityDialog.react';
 import ColumnsConfiguration from 'components/ColumnsConfiguration/ColumnsConfiguration.react'
 import SecureFieldsDialog   from 'dashboard/Data/Browser/SecureFieldsDialog.react';
 import LoginDialog          from 'dashboard/Data/Browser/LoginDialog.react';
-import Toggle               from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }               from 'components/Toggle/Toggle.react';
 
 let BrowserToolbar = ({
   className,
@@ -242,7 +242,7 @@ let BrowserToolbar = ({
             disabled={isPendingEditCloneRows}
           >
             <MenuItem text={currentUser ? 'Switch User' : 'As User'} onClick={showLogin} />
-            {currentUser ? <MenuItem text={<span>Use Master Key <Toggle type={Toggle.Types.HIDE_LABELS} value={useMasterKey} onChange={toggleMasterKeyUsage} switchNoMargin={true} additionalStyles={{ display: 'inline', lineHeight: 0, margin: 0, paddingLeft: 5 }} /></span>} onClick={toggleMasterKeyUsage} /> : <noscript />}
+            {currentUser ? <MenuItem text={<span>Use Master Key <Toggle type={ToggleTypes.HIDE_LABELS} value={useMasterKey} onChange={toggleMasterKeyUsage} switchNoMargin={true} additionalStyles={{ display: 'inline', lineHeight: 0, margin: 0, paddingLeft: 5 }} /></span>} onClick={toggleMasterKeyUsage} /> : <noscript />}
             {currentUser ? <MenuItem text={<span>Stop browsing (<b>{currentUser.get('username')}</b>)</span>} onClick={logout} /> : <noscript />}
         </BrowserMenu>
       )}

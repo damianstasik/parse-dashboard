@@ -11,7 +11,7 @@ import Dropdown    from 'components/Dropdown/Dropdown.react';
 import Field       from 'components/Field/Field.react';
 import Label       from 'components/Label/Label.react';
 import Option      from 'components/Dropdown/Option.react';
-import Toggle      from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }      from 'components/Toggle/Toggle.react';
 import TextInput   from 'components/TextInput/TextInput.react';
 import styles      from 'dashboard/Data/Browser/ExportSelectedRowsDialog.scss';
 
@@ -78,7 +78,7 @@ export default class ExportSelectedRowsDialog extends React.Component {
           } />
         {this.state.exportType === '.json' && <Field
           label={<Label text='Indentation' />}
-          input={<Toggle value={this.state.indentation} type={Toggle.Types.YES_NO} onChange={(indentation) => {this.setState({indentation})}} />} />
+          input={<Toggle value={this.state.indentation} type={ToggleTypes.YES_NO} onChange={(indentation) => {this.setState({indentation})}} />} />
           }
         {this.props.selection['*'] && <Field
           label={

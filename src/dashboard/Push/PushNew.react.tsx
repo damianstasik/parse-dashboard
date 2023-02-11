@@ -31,7 +31,7 @@ import SliderWrap              from 'components/SliderWrap/SliderWrap.react';
 import styles                  from 'dashboard/Push/Push.scss';
 import subscribeTo             from 'lib/subscribeTo';
 import TextInput               from 'components/TextInput/TextInput.react';
-import Toggle                  from 'components/Toggle/Toggle.react';
+import Toggle, { ToggleTypes }                  from 'components/Toggle/Toggle.react';
 import Toolbar                 from 'components/Toolbar/Toolbar.react';
 import { Directions }          from 'lib/Constants';
 import { extractExpiration, extractPushTime } from 'lib/extractTime';
@@ -256,7 +256,7 @@ class PushNew extends DashboardView {
         key='testVariable'
         label={<Label text='Test Variable' description='You can test the messaging or the delivery time.' />}
         input={<Toggle
-          type={Toggle.Types.TWO_WAY}
+          type={ToggleTypes.TWO_WAY}
           optionLeft='message'
           optionRight='time'
           value={fields.exp_type}
@@ -362,7 +362,7 @@ class PushNew extends DashboardView {
           className={FieldStyles.header}
           label={<Label text='Send immediately?' />}
           input={<Toggle
-            type={Toggle.Types.CUSTOM}
+            type={ToggleTypes.CUSTOM}
             value={fields.push_time_type}
             labelLeft='No'
             labelRight='Yes'
@@ -428,7 +428,7 @@ class PushNew extends DashboardView {
           className={FieldStyles.header}
           label={<Label text='What type of Message A are you sending?' />}
           input={<Toggle
-            type={Toggle.Types.CUSTOM}
+            type={ToggleTypes.CUSTOM}
             labelLeft='Text'
             labelRight='JSON'
             optionLeft='text'
@@ -454,7 +454,7 @@ class PushNew extends DashboardView {
           className={FieldStyles.header}
           label={<Label text='What type of Message B are you sending?' />}
           input={<Toggle
-            type={Toggle.Types.CUSTOM}
+            type={ToggleTypes.CUSTOM}
             labelLeft='Text'
             labelRight='JSON'
             optionLeft='text'
@@ -483,7 +483,7 @@ class PushNew extends DashboardView {
         className={FieldStyles.header}
         label={<Label text='What type of message are you sending?' />}
         input={<Toggle
-          type={Toggle.Types.CUSTOM}
+          type={ToggleTypes.CUSTOM}
           labelLeft='Text'
           labelRight='JSON'
           optionLeft='text'
